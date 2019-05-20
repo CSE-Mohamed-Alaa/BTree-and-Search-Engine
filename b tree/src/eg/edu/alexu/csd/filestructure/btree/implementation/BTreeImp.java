@@ -67,8 +67,11 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 	
 	private int minimumDegree;
 	private IBTreeNode<K, V> root;
+	
 	public BTreeImp(int minimumDegree) {
 		this.minimumDegree = minimumDegree;
+		root = new BtreeNode<>();
+		root.setLeaf(true);
 	}
 	@Override
 	public int getMinimumDegree() {
