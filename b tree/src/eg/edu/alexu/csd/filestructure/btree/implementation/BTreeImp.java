@@ -66,18 +66,18 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 	}
 	
 	private int minimumDegree;
+	private IBTreeNode<K, V> root;
 	public BTreeImp(int minimumDegree) {
 		this.minimumDegree = minimumDegree;
 	}
 	@Override
 	public int getMinimumDegree() {
-		return 0;
+		return minimumDegree;
 	}
 
 	@Override
 	public IBTreeNode<K, V> getRoot() {
-		// TODO Auto-generated method stub
-		return null;
+		return root;
 	}
 
 	@Override
@@ -88,8 +88,20 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 
 	@Override
 	public V search(K key) {
-		// TODO Auto-generated method stub
-		return null;
+		return BTreeSearch(key, root);
+	}
+	
+	private V BTreeSearch(K key,IBTreeNode<K, V> x) {
+		int i = 0;
+		while (i < x.getNumOfKeys()&& key.compareTo(x.getKeys().get(i)) < 0) {
+			i++;
+		}
+		if(i<x.getNumOfKeys()&& key.compareTo(x.getKeys().get(i)) == 0) {
+			return x.getValues().get(i);
+		}else if(x.isLeaf()) {
+			return null;
+		}else
+			return BTreeSearch(key, x.getChildren().get(i));
 	}
 
 	@Override
