@@ -159,6 +159,7 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 			node.getChildren().subList(t, 2*t).clear();
 		}
 	}
+	
 	private IBTreeNode<K, V> insertNonFull(K key,final IBTreeNode<K, V> x) {
 		if (x.isLeaf()) {
 			return x;
