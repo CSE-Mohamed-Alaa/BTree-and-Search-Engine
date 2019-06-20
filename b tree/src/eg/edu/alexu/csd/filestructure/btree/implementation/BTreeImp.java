@@ -196,6 +196,9 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 		if (key == null) {
 			throw new RuntimeErrorException(null);
 		}
+		if(root == null) {
+			return null;
+		}
 		return BTreeSearch(key, root);
 	}
 
@@ -214,8 +217,11 @@ public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 
 	@Override
 	public boolean delete(K key) {
-		if (key == null || root == null) {
+		if (key == null) {
 			throw new RuntimeErrorException(null);
+		}
+		if (root == null) {
+			return false;
 		}
 		if (root.isLeaf()) {
 			int index = 0;

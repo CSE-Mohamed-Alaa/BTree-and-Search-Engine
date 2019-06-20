@@ -3,33 +3,32 @@ package eg.edu.alexu.csd.filestructure.btree.implementation;
 import eg.edu.alexu.csd.filestructure.btree.ISearchResult;
 
 public class SearchResult implements ISearchResult {
-
-	public SearchResult(String string, int i) {
-		// TODO Auto-generated constructor stub
+	String id;
+	int rank;
+	
+	public SearchResult(String id, int rank) {
+		this.id = id;
+		this.rank = rank;
 	}
-
+	
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id;
 	}
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
-
+		this.id = id;
 	}
 
 	@Override
 	public int getRank() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.rank;
 	}
 
 	@Override
 	public void setRank(int rank) {
-		// TODO Auto-generated method stub
-
+		this.rank = rank;
 	}
 
 }
