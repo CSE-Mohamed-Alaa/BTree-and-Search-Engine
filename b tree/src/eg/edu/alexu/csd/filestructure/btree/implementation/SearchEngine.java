@@ -1,5 +1,7 @@
 package eg.edu.alexu.csd.filestructure.btree.implementation;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import eg.edu.alexu.csd.filestructure.btree.ISearchEngine;
@@ -15,8 +17,25 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void indexDirectory(String directoryPath) {
-		// TODO Auto-generated method stub
+		List<File> files = new ArrayList<>();
+		listf(directoryPath, files);
+		for (File file : files) {
+			indexWebPage(file.getAbsolutePath());
+		}
+	}
 
+	private void listf(String directoryName, List<File> files) {
+		File directory = new File(directoryName);
+		File[] fList = directory.listFiles();
+		if (fList != null) {
+			for (File file : fList) {
+				if (file.isFile()) {
+					files.add(file);
+				} else if (file.isDirectory()) {
+					listf(file.getAbsolutePath(), files);
+				}
+			}
+		}
 	}
 
 	@Override
