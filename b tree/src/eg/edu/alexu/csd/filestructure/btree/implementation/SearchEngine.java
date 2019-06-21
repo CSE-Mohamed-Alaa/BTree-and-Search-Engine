@@ -157,12 +157,15 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public List<ISearchResult> searchByMultipleWordWithRanking(String sentence) {
+		if (sentence == null) {
+			throw new RuntimeErrorException(null);
+		}
 		List<ISearchResult> ans = new ArrayList<>();
 		sentence = sentence.trim();
 		String [] words = sentence.split("\\s+");
 		List<HashMap<String,ISearchResult>> wordsmap = new ArrayList<>();
 		for(String word : words) {
-			List<ISearchResult> wordList = bTree.search(word);
+			List<ISearchResult> wordList = bTree.search(word.toLowerCase());
 			if(wordList == null)return ans;
 			HashMap<String,ISearchResult> map = new HashMap<>();
 			for (int i = 0; i < wordList.size(); i++) {
