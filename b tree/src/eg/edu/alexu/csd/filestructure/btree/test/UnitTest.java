@@ -911,7 +911,7 @@ public class UnitTest {
 		try {
 			searchEngine.indexDirectory("res");
 			List<ISearchResult> expected = Arrays
-					.asList(new SearchResult[] { new SearchResult("7738283", 1), new SearchResult("7712174", 3), new SearchResult("7724107", 4), new SearchResult("7738283", 1), new SearchResult("7742185", 1) });
+					.asList(new SearchResult[] { new SearchResult("7712174", 3), new SearchResult("7724107", 4), new SearchResult("7738283", 1), new SearchResult("7742185", 1) });
 
 			Collections.sort(expected, new Comparator<ISearchResult>() {
 				@Override
@@ -990,7 +990,7 @@ public class UnitTest {
 			searchEngine.indexDirectory("res");
 			searchEngine.deleteWebPage("res\\sub folder 2\\nested folder\\wiki_06");
 			List<ISearchResult> expected = Arrays
-					.asList(new SearchResult[] { new SearchResult("7738283", 1), new SearchResult("7712174", 3), new SearchResult("7738283", 1), new SearchResult("7742185", 1) });
+					.asList(new SearchResult[] { new SearchResult("7712174", 3), new SearchResult("7738283", 1), new SearchResult("7742185", 1) });
 
 			Collections.sort(expected, new Comparator<ISearchResult>() {
 				@Override
