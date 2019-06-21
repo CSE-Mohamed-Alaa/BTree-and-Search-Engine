@@ -105,8 +105,7 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public List<ISearchResult> searchByWordWithRanking(String word) {
-		// TODO Auto-generated method stub
-		return null;
+		return bTree.search(word.toLowerCase());
 	}
 
 	@Override
