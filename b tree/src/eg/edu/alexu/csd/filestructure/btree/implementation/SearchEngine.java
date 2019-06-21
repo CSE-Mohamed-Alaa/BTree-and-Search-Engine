@@ -142,7 +142,11 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public List<ISearchResult> searchByWordWithRanking(String word) {
-		return bTree.search(word.toLowerCase());
+		if(word == null) {
+			throw new RuntimeErrorException(null);
+		}
+		List<ISearchResult> ans = bTree.search(word.toLowerCase());
+		return ans != null ? ans : new ArrayList<ISearchResult>();
 	}
 
 	@Override
