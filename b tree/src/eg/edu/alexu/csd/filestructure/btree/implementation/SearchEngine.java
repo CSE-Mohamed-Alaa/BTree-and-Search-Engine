@@ -76,6 +76,10 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void indexDirectory(String directoryPath) {
+		File directory = new File(directoryPath);
+		if(!directory.exists()) {
+			return;
+		}
 		List<File> files = new ArrayList<>();
 		listf(directoryPath, files);
 		for (File file : files) {
@@ -99,7 +103,40 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void deleteWebPage(String filePath) {
-		// TODO Auto-generated method stub
+		File file = new File(filePath);
+		if(!file.exists()) {
+			return;
+		}
+		List<Pair<String, String>> docArray = parseXML(filePath);
+		Pattern p = Pattern.compile("\\w+");
+		for (Pair<String, String> doc : docArray) {
+			String id = doc.getKey();
+			Matcher m = p.matcher(doc.getValue());
+			List<String> words = new ArrayList<>();
+			while (m.find()) {
+				words.add(m.group());
+			}
+			Map<String, Integer> results = new HashMap<>();
+			for (String word : words) {
+				String lowerCaseWord = word.toLowerCase();
+				results.put(lowerCaseWord, results.getOrDefault(lowerCaseWord, 0) + 1);
+			}
+			for (Map.Entry<String, Integer> wordRankPair : results.entrySet()) {
+				List<ISearchResult> searchResultList;
+				searchResultList = bTree.search(wordRankPair.getKey());
+				if (searchResultList != null) {
+					for (ISearchResult searchResult : searchResultList) {
+						if (id.equals(searchResult.getId())) {
+							searchResultList.remove(searchResult);
+							if (searchResultList.isEmpty()) {
+								bTree.delete(wordRankPair.getKey());
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
 
 	}
 
