@@ -151,7 +151,7 @@ public class SearchEngine implements ISearchEngine {
 		if(word == null) {
 			throw new RuntimeErrorException(null);
 		}
-		List<ISearchResult> ans = bTree.search(word.toLowerCase());
+		List<ISearchResult> ans = bTree.search(word.trim().toLowerCase());
 		return ans != null ? ans : new ArrayList<ISearchResult>();
 	}
 
