@@ -3,8 +3,8 @@ package eg.edu.alexu.csd.filestructure.btree.implementation;
 import eg.edu.alexu.csd.filestructure.btree.ISearchResult;
 
 public class SearchResult implements ISearchResult {
-	String id;
-	int rank;
+	private String id;
+	private int rank;
 	
 	public SearchResult(String id, int rank) {
 		this.id = id;

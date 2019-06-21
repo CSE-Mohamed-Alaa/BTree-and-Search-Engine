@@ -9,7 +9,6 @@ import javax.management.RuntimeErrorException;
 import eg.edu.alexu.csd.filestructure.btree.IBTree;
 import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
 
-//TODO implement hard disk && test delete
 
 public class BTreeImp<K extends Comparable<K>, V> implements IBTree<K, V> {
 	private class BTreeNode<Key extends Comparable<Key>, Value> implements IBTreeNode<Key, Value> {

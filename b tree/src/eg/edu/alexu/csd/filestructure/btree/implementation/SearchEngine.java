@@ -26,7 +26,7 @@ import eg.edu.alexu.csd.filestructure.btree.ISearchResult;
 import javafx.util.Pair;
 
 public class SearchEngine implements ISearchEngine {
-	IBTree<String, List<ISearchResult>> bTree;
+	private IBTree<String, List<ISearchResult>> bTree;
 
 	public SearchEngine(int t) {
 		bTree = new BTreeImp<String, List<ISearchResult>>(t);
