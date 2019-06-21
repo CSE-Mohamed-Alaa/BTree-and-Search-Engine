@@ -34,6 +34,9 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void indexWebPage(String filePath) {
+		if(filePath == null) {
+			throw new RuntimeErrorException(null);
+		}
 		List<Pair<String, String>> docArray = parseXML(filePath);
 		Pattern p = Pattern.compile("\\w+");
 		for (Pair<String, String> doc : docArray) {
@@ -76,9 +79,12 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void indexDirectory(String directoryPath) {
+		if(directoryPath == null) {
+			throw new RuntimeErrorException(null);
+		}
 		File directory = new File(directoryPath);
 		if(!directory.exists()) {
-			return;
+			throw new RuntimeErrorException(null);
 		}
 		List<File> files = new ArrayList<>();
 		listf(directoryPath, files);
@@ -103,9 +109,8 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public void deleteWebPage(String filePath) {
-		File file = new File(filePath);
-		if(!file.exists()) {
-			return;
+		if(filePath == null) {
+			throw new RuntimeErrorException(null);
 		}
 		List<Pair<String, String>> docArray = parseXML(filePath);
 		Pattern p = Pattern.compile("\\w+");
@@ -162,6 +167,10 @@ public class SearchEngine implements ISearchEngine {
 	 * @return List of pair contains <id, text> for every document in the file
 	 */
 	private List<Pair<String, String>> parseXML(String filePath) {
+		File f = new File(filePath);
+		if(!f.exists()) {
+			throw new RuntimeErrorException(null);
+		}
 		List<Pair<String, String>> docArray = new ArrayList<>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
