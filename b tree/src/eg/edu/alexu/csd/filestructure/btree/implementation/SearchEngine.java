@@ -175,8 +175,7 @@ public class SearchEngine implements ISearchEngine {
 					docArray.add(new Pair<String, String>(docElement.getAttribute("id"), docElement.getTextContent()));
 				}
 			}
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			e.printStackTrace();
+		} catch (SAXException | IOException | ParserConfigurationException | IllegalArgumentException e) {
 			throw new RuntimeErrorException(null);
 		}
 		return docArray;
