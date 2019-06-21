@@ -3,6 +3,7 @@ package eg.edu.alexu.csd.filestructure.btree.implementation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,8 +157,44 @@ public class SearchEngine implements ISearchEngine {
 
 	@Override
 	public List<ISearchResult> searchByMultipleWordWithRanking(String sentence) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ISearchResult> ans = new ArrayList<>();
+		sentence = sentence.trim();
+		String [] words = sentence.split("\\s+");
+		List<HashMap<String,ISearchResult>> wordsmap = new ArrayList<>();
+		for(String word : words) {
+			List<ISearchResult> wordList = bTree.search(word);
+			if(wordList == null)return ans;
+			HashMap<String,ISearchResult> map = new HashMap<>();
+			for (int i = 0; i < wordList.size(); i++) {
+				map.put(wordList.get(i).getId(), wordList.get(i));
+			}
+			wordsmap.add(map);
+		}
+		int min = 0;
+		for (int i = 0; i < wordsmap.size(); i++) {
+			if (wordsmap.get(i).size() < wordsmap.get(min).size()) {
+				min = i;
+			}
+		}
+		 
+		ArrayList<ISearchResult>smallMapValues = new ArrayList<>();
+		smallMapValues.addAll(wordsmap.get(min).values());
+		for (int i = 0; i < smallMapValues.size(); i++) {
+			boolean common = true;
+			int smallestFreq= Integer.MAX_VALUE;
+			for (int j = 0; j < wordsmap.size(); j++) {
+				if(!wordsmap.get(j).containsKey(smallMapValues.get(i).getId())) {
+					common = false;
+					break;
+				}
+				smallestFreq = Math.min(smallestFreq, wordsmap.get(j).get(smallMapValues.get(i).getId()).getRank());
+			}
+			if(common) {
+				ans.add(new SearchResult(smallMapValues.get(i).getId(), smallestFreq));
+			}
+		}
+		
+		return ans;
 	}
 
 	/**
@@ -188,12 +225,6 @@ public class SearchEngine implements ISearchEngine {
 			throw new RuntimeErrorException(null);
 		}
 		return docArray;
-	}
-
-	public static void main(String[] arg) {
-		SearchEngine x = new SearchEngine(100);
-		x.indexWebPage("res\\wiki_00");
-		System.out.println();
 	}
 
 }
