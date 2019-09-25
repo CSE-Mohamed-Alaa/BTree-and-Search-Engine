@@ -12,7 +12,7 @@ Implementation of B Tree and utilize it at simple Search Engine.
 
 ## Authors
 
-* **Ahmed Ashraf** []()
+* **Ahmed Ashraf** [Ahmed-Ashraf22](https://github.com/ahmed-ashraf22/)
 * **Mohamed Alaa** [CSE-Mohamed-Alaa](https://github.com/CSE-Mohamed-Alaa)
-* **Mustafa Mohamed** [mustafa-mohamedz](https://github.com/mustafa-mohamedz)
+* **Mustafa Mohamed** [Mustafa-Mohamedz](https://github.com/mustafa-mohamedz)
  
